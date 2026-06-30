@@ -1,8 +1,6 @@
 name: attendance
 
 on:
-  schedule:
-    - cron: "0 0 * * 1-5"
   workflow_dispatch:
 
 jobs:
@@ -14,13 +12,12 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: '3.11'
 
-      - run: pip install -r requirements.txt
+      - name: Install dependencies
+        run: |
+          pip install playwright
+          playwright install --with-deps
 
-      - run: python -m playwright install
-
-      - run: python attendance.py
-        env:
-          LOGIN_ID: ${{ secrets.LOGIN_ID }}
-          LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+      - name: Run script
+        run: python attendance.py
