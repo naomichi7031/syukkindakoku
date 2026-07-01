@@ -3,6 +3,11 @@ name: attendance
 on:
   workflow_dispatch:
 
+  schedule:
+    # 日本時間 平日9:00
+    # GitHub Actions は UTC なので 0:00 UTC = JST 9:00
+    - cron: '0 0 * * 1-5'
+
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -20,4 +25,7 @@ jobs:
           playwright install --with-deps
 
       - name: Run script
+        env:
+          ATTENDANCE_ID: ${{ secrets.ATTENDANCE_ID }}
+          ATTENDANCE_PASSWORD: ${{ secrets.ATTENDANCE_PASSWORD }}
         run: python attendance.py
