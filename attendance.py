@@ -14,23 +14,22 @@ def run(playwright: Playwright) -> None:
 
     page.goto("https://sa.wims.jp/n9oZ2s/WP001Init.do?compUrl=OMK3")
 
+    print("ページを開きました")
+
     # ID入力
     page.get_by_role("textbox", name="User ID").fill(USER_ID)
 
     # パスワード入力
     page.get_by_role("textbox", name="Password").fill(PASSWORD)
 
-    # ログインボタン押下
-    page.get_by_role("button").click()
+    print("ID/PASS入力完了")
 
-    page.wait_for_timeout(3000)
-
-    # 出勤押下
+    # 出勤ボタン押下
     page.get_by_role("link", name="出勤").click()
 
     print("出勤打刻完了")
 
-    page.wait_for_timeout(3000)
+    page.wait_for_timeout(5000)
 
     context.close()
     browser.close()
