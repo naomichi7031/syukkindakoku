@@ -4,7 +4,7 @@ on:
   schedule:
     # 日本時間 平日8:45
     # GitHub Actions は UTC なので 23:45 UTC = JST 8:45
-    - cron: '45 23 * * 1-5'
+    - cron: '*/5 * * * *'
 
   workflow_dispatch:
 
