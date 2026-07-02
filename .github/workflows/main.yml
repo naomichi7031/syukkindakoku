@@ -2,7 +2,9 @@ name: attendance
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    # 日本時間 平日8:45
+    # GitHub Actions は UTC なので 23:45 UTC = JST 8:45
+    - cron: '45 23 * * 1-5'
 
   workflow_dispatch:
 
@@ -24,6 +26,6 @@ jobs:
 
       - name: Run script
         env:
-          USER_ID: ${{ secrets.USER_ID }}
-          PASSWORD: ${{ secrets.PASSWORD }}
+          ATTENDANCE_ID: ${{ secrets.ATTENDANCE_ID }}
+          ATTENDANCE_PASSWORD: ${{ secrets.ATTENDANCE_PASSWORD }}
         run: python attendance.py
