@@ -1,11 +1,10 @@
 name: attendance
 
 on:
-  workflow_dispatch:
   schedule:
-    # 日本時間 平日8:45
-    # GitHub Actions は UTC
-  - cron: '*/5 * * * *'
+    - cron: '*/5 * * * *'
+
+  workflow_dispatch:
 
 jobs:
   run:
