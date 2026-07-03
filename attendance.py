@@ -1,17 +1,18 @@
 import os
 from playwright.sync_api import sync_playwright
 
-USER_ID = os.getenv("ATTENDANCE_ID")
-PASSWORD = os.getenv("ATTENDANCE_PASSWORD")
+USER_ID = os.getenv("USER_ID")
+PASSWORD = os.getenv("PASSWORD")
 
-with sync_playwright() as p:
-    browser = p.chromium.launch(headless=True)
+def run(playwright):
+    browser = playwright.chromium.launch(
+        headless=True,
+        args=["--no-sandbox"]
+    )
 
     page = browser.new_page()
 
     page.goto("https://sa.wims.jp/n9oZ2s/WP001Init.do?compUrl=OMK3")
-
-    print("ページを開きました")
 
     page.get_by_role("textbox", name="User ID").fill(USER_ID)
     page.get_by_role("textbox", name="Password").fill(PASSWORD)
@@ -21,3 +22,6 @@ with sync_playwright() as p:
     print("打刻完了")
 
     browser.close()
+
+with sync_playwright() as playwright:
+    run(playwright)
