@@ -1,14 +1,13 @@
 import os
 from playwright.sync_api import sync_playwright
 
-USER_ID = os.getenv("USER_ID")
-PASSWORD = os.getenv("PASSWORD")
+USER_ID = os.getenv("ATTENDANCE_ID")
+PASSWORD = os.getenv("ATTENDANCE_PASSWORD")
 
 def run(playwright):
     browser = playwright.chromium.launch(
         headless=True,
-        args=["--no-sandbox"],
-        channel="chromium"
+        args=["--no-sandbox"]
     )
 
     page = browser.new_page()
