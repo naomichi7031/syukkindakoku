@@ -8,6 +8,7 @@ def run(playwright):
     browser = playwright.chromium.launch(
         headless=True,
         args=["--no-sandbox"]
+        channel="chromium"
     )
 
     page = browser.new_page()
