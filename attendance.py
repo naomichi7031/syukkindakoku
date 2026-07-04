@@ -7,7 +7,7 @@ PASSWORD = os.getenv("PASSWORD")
 def run(playwright):
     browser = playwright.chromium.launch(
         headless=True,
-        args=["--no-sandbox"]
+        args=["--no-sandbox"],
         channel="chromium"
     )
 
